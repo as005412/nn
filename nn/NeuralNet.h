@@ -12,20 +12,21 @@ public:
 	std::vector<double> weights;
 	double getWeight(int i, int j);
 	void setWeight(int i, int j, double value);
-	double getThreshold(int j);
-	void setThreshold(int j, double value);
 };
 
-class HopfieldNet
+class VectorQuantization
 {
 public:
-	HopfieldNet(int inputSize);
+	VectorQuantization(int inputSize, int codeVectorCount);
 	std::vector<Layer> layers;
-
+	int epochCount = 100;
 	void input(std::vector<double>& inputData);
+	void setCodeVector(std::vector<std::vector<double>>& value);
+	void train();
 	void calculate();
 	std::vector<double> outputVector();
-	void trainNetwork(std::vector<double>& trainData);
-	void setActivationFunction(Layer& layer, std::shared_ptr<ActivationFunction>& function);
+private:
+	std::vector<double> normVector;
+	int winVector = 0;
 };
 
