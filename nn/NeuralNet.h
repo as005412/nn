@@ -16,18 +16,16 @@ public:
 	void setThreshold(int j, double value);
 };
 
-class NeuralNet
+class HopfieldNet
 {
 public:
-	double alpha = 0.01;
-	NeuralNet(int inputSize, int hiddenCount, int hiddenSize, int outputSize);
+	HopfieldNet(int inputSize);
 	std::vector<Layer> layers;
 
 	void input(std::vector<double>& inputData);
-	void feedForward();
+	void calculate();
 	std::vector<double> outputVector();
 	void trainNetwork(std::vector<double>& trainData);
 	void setActivationFunction(Layer& layer, std::shared_ptr<ActivationFunction>& function);
-	double deviation(std::vector<double>& trainData);
 };
 

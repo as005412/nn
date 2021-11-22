@@ -54,3 +54,10 @@ public:
 	double active(double input) override;
 	double derivative(double input, double output) override;
 };
+
+class AFStep : public ActivationFunction
+{
+public:
+	double active(double input) override;
+	double derivative(double input, double output) override;
+};

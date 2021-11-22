@@ -49,3 +49,13 @@ double AFLinear::derivative(double input, double output)
 {
 	return 1.0;
 }
+
+double AFStep::active(double input)
+{
+	return (input >= 0) ? 1.0 : -1.0;
+}
+
+double AFStep::derivative(double input, double output)
+{
+	return 0.0;
+}

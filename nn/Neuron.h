@@ -9,6 +9,7 @@ public:
 	double propagationError = 0;
 	ActivationFunction* function = nullptr;
 
+	void addInput(double value);
 	void active();
 	double derivative();
 };

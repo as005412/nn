@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F72152C5274BE887008C8502 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F72152C4274BE887008C8502 /* main.cpp */; };
+		F72152CA274BF31B008C8502 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F72152C9274BF31B008C8502 /* main.cpp */; };
 		F76943FD274AF51000589B15 /* Neuron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F76943F8274AF51000589B15 /* Neuron.cpp */; };
 		F76943FF274AF51000589B15 /* NeuralNet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F76943FA274AF51000589B15 /* NeuralNet.cpp */; };
 		F7694400274AF51000589B15 /* ActivationFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F76943FB274AF51000589B15 /* ActivationFunction.cpp */; };
@@ -26,7 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F72152C4274BE887008C8502 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F72152C9274BF31B008C8502 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F76943EC274AF4D800589B15 /* nn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nn; sourceTree = BUILT_PRODUCTS_DIR; };
 		F76943F7274AF51000589B15 /* Neuron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neuron.h; sourceTree = "<group>"; };
 		F76943F8274AF51000589B15 /* Neuron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Neuron.cpp; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 		F76943EE274AF4D800589B15 /* nn */ = {
 			isa = PBXGroup;
 			children = (
-				F72152C4274BE887008C8502 /* main.cpp */,
+				F72152C9274BF31B008C8502 /* main.cpp */,
 				F76943FB274AF51000589B15 /* ActivationFunction.cpp */,
 				F7694404274AF51B00589B15 /* ActivationFunction.h */,
 				F76943FA274AF51000589B15 /* NeuralNet.cpp */,
@@ -135,8 +135,8 @@
 			files = (
 				F76943FF274AF51000589B15 /* NeuralNet.cpp in Sources */,
 				F76943FD274AF51000589B15 /* Neuron.cpp in Sources */,
+				F72152CA274BF31B008C8502 /* main.cpp in Sources */,
 				F7694400274AF51000589B15 /* ActivationFunction.cpp in Sources */,
-				F72152C5274BE887008C8502 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

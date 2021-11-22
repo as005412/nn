@@ -1,5 +1,10 @@
 #include "Neuron.h"
 
+void Neuron::addInput(double value)
+{
+    input += value;
+}
+
 void Neuron::active() {
     output = function->active(input);
 }

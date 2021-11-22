@@ -4,86 +4,62 @@
 #include <string>
 #include "NeuralNet.h"
 
-double numberByIndex(int ind) {
-	if (ind == 0) return 6;
-	if (ind == 1) return 5;
-	if (ind == 2) return 8;
-}
-
 int main()
 {
 	std::vector<std::vector<double>> inputData;
 	std::vector<std::vector<double>> trainData;
-	inputData.push_back({ 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 });
-	trainData.push_back({ 1, 0, 0 });
-	inputData.push_back({ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
-	trainData.push_back({ 0, 1, 0 });
-	inputData.push_back({ 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1 });
-	trainData.push_back({ 0, 0, 1 });
+	inputData.push_back({ 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1 });
+	inputData.push_back({ 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 });
+	inputData.push_back({ 1, 1, 1, -1, -1, -1, 1, 1, 1, -1, -1, -1, 1, 1, 1, -1, -1, -1, 1, 1 });
 
-	std::shared_ptr<ActivationFunction> sigmoid = std::shared_ptr<ActivationFunction>(new AFSigmoid());
-	std::shared_ptr<ActivationFunction> linear = std::shared_ptr<ActivationFunction>(new AFLinear());
+	std::shared_ptr<ActivationFunction> step = std::shared_ptr<ActivationFunction>(new AFStep());
 
-	int hiddenCount = 1, inputCount = 20, outputCount = 3;
-	NeuralNet nn(inputCount, hiddenCount, 7, outputCount);
+	int inputCount = 20;
+	HopfieldNet nn(inputCount);
 
-	nn.setActivationFunction(nn.layers[0], linear);
-	for (size_t i = 0; i < hiddenCount; i++)
-		nn.setActivationFunction(nn.layers[i + 1], sigmoid);
-	nn.setActivationFunction(nn.layers[nn.layers.size() - 1], sigmoid);
+	nn.setActivationFunction(nn.layers[0], step);
+	nn.setActivationFunction(nn.layers[1], step);
 
 	std::cout << "TRAIN" << std::endl;
-	double td = 200.0;
-	while (td >= 0.001)
-	{
-		td = 0;
-		for (int i = 0; i < inputData.size(); i++) {
-			nn.input(inputData[i]);
-			nn.trainNetwork(trainData[i]);
-			td += nn.deviation(trainData[i]);
-		}
+
+	for (int i = 0; i < inputData.size(); i++) {
+		nn.trainNetwork(inputData[i]);
 	}
-	std::cout << "Total deviation: " << td << std::endl;
-	std::cout << "\nTrain images Output" << std::endl;
 
 	std::vector<double> outputData;
 
 	for (int i = 0; i < inputData.size(); i++) {
 		nn.input(inputData[i]);
 		outputData = nn.outputVector();
+		std::cout << "#" << i + 1 << std::endl;
 		for (int k = 0; k < outputData.size(); k++) {
-			if (round(outputData[k]) > 0)
-			{
-				std::cout << "\nInput#" << i + 1 << ": ";
-				for (int q = 0; q < inputData[i].size(); q++) {
-					std::cout << std::to_string(inputData[i][q]).substr(0, 1) << "; ";
-				}
-				std::cout << "\nNetwork  output#" << i + 1 << ": " << std::to_string(numberByIndex(k)).substr(0, 1) << std::endl;
-			}
+			std::cout << std::to_string(outputData[k]).substr(0, 4) << "; ";
+		}
+		std::cout << std::endl;
+	}
+
+	for (int k = 0; k < inputData.size(); k++) {
+		for (int i = 0; i < 3; i++) {
+			int ind = rand() % (inputData[0].size() - 1);
+			inputData[k][ind] = (inputData[k][ind] == 1) ? -1 : 1;
 		}
 	}
-	std::cout << "\nRandom images Output" << std::endl;
-	inputData.clear();
-	for (int i = 0; i < 6; i++) {
-		std::vector<double> set;
-		for (int k = 0; k < 20; k++)
-			set.push_back((rand() % 100 < 50) ? 0 : 1);
-		inputData.push_back(set);
-	}
+
+	std::cout << "\nOutput" << std::endl;
 
 	for (int i = 0; i < inputData.size(); i++) {
 		nn.input(inputData[i]);
 		outputData = nn.outputVector();
-		for (int k = 0; k < outputData.size(); k++) {
-			if (round(outputData[k]) > 0)
-			{
-				std::cout << "\nInput#" << i + 1 << ": ";
-				for (int q = 0; q < inputData[i].size(); q++) {
-					std::cout << std::to_string(inputData[i][q]).substr(0, 1) << "; ";
-				}
-				std::cout << "\nNetwork  output#" << i + 1 << ": " << std::to_string(numberByIndex(k)).substr(0, 1) << std::endl;
-			}
+		std::cout << "Random#" << i + 1 << std::endl;
+		for (int k = 0; k < inputData[i].size(); k++) {
+			std::cout << std::to_string(inputData[i][k]).substr(0, 4) << "; ";
 		}
+		std::cout << std::endl;
+		std::cout << "Output#" << i + 1 << std::endl;
+		for (int k = 0; k < outputData.size(); k++) {
+			std::cout << std::to_string(outputData[k]).substr(0, 4) << "; ";
+		}
+		std::cout << std::endl;
 	}
 	return 0;
 }
